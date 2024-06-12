@@ -22,20 +22,67 @@
     <main>
         <section id="image-section">
             <h2>Найновіші поступлення</h2>
-            <img width="140" height="100" id="main-image" src="images/books.jpg" alt="Найновіші поступлення" loading="lazy">
-            <img width="145" height="100" id="main-image" src="images/books2.jpg" alt="Найновіші поступлення" loading="lazy">
-            <img width="145" height="100" id="main-image" src="images/book3.jpg" alt="Найновіші поступлення" loading="lazy">
+            <img width="125" height="100" id="main-image" data-src="images/books.jpg" alt="Найновіші поступлення" loading="lazy">
+            <img width="130" height="100" id="main-image" data-src="images/books2.jpg" alt="Найновіші поступлення" loading="lazy">
+            <img width="130" height="100" id="main-image" data-src="images/book3.jpg" alt="Найновіші поступлення" loading="lazy">
         </section>
         
         <section id="youtube-video">
             <h2>Майбутні поступлення</h2>
-            <iframe width="350" height="160" src="https://www.youtube.com/embed/wPDAjvQCgIg?si=967tH-1xBp1DfAZS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-placeholder" data-video="https://www.youtube.com/embed/wPDAjvQCgIg?si=967tH-1xBp1DfAZS">
+                <img src="images/video-placeholder.jpg" alt="Video Placeholder">
+            </div>
         </section>
-
     </main>
 
-        <footer>
+    <footer>
         <p>&copy; 2024 Інтернет-книгарня. Усі права захищено.</p>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ліниве завантаження зображень
+            const lazyImages = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.getAttribute('data-src');
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                });
+            });
+
+            lazyImages.forEach(image => {
+                imageObserver.observe(image);
+            });
+
+            // Ліниве завантаження відео
+            const lazyVideos = document.querySelectorAll('.video-placeholder');
+            const videoObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const videoDiv = entry.target;
+                        const iframe = document.createElement('iframe');
+                        iframe.setAttribute('width', '350');
+                        iframe.setAttribute('height', '160');
+                        iframe.setAttribute('src', videoDiv.getAttribute('data-video'));
+                        iframe.setAttribute('title', 'YouTube video player');
+                        iframe.setAttribute('frameborder', '0');
+                        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                        iframe.setAttribute('allowfullscreen', true);
+                        videoDiv.innerHTML = '';
+                        videoDiv.appendChild(iframe);
+                        observer.unobserve(videoDiv);
+                    }
+                });
+            });
+
+            lazyVideos.forEach(video => {
+                videoObserver.observe(video);
+            });
+        });
+    </script>
 </body>
 </html>
