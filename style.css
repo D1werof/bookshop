@@ -1,0 +1,184 @@
+/* Весь ваш поточний CSS код */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+#about-info,
+#contact-info,
+#image-section,
+#main-image,
+#iframe,
+#categories,
+section,
+#book-details,
+#cart-items {
+    margin-bottom: 20px;
+}
+
+#about-info table,
+#cart-items ul,
+section ul {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#about-info th,
+#about-info td,
+#cart-items ul li div,
+section ul li {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#about-info th,
+#categories ul li a,
+section ul li a {
+    background-color: #333;
+    color: #fff;
+}
+
+#about-info p,
+#contact-info p,
+section ul li p,
+#book-details div p,
+#cart-items ul li div p {
+    margin: 5px 0;
+}
+
+#contact-form,
+#book-details div,
+#cart-items ul li {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact-form label,
+#book-details div > div {
+    margin-bottom: 5px;
+}
+
+#contact-form input[type="text"],
+#contact-form input[type="email"],
+#contact-form textarea,
+#cart-items ul li img {
+    width: 33%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#contact-form textarea {
+    resize: vertical;
+}
+
+#contact-form button,
+#cart-items ul li div button,
+#cart-items button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#contact-form button:hover,
+#cart-items ul li div button:hover,
+#cart-items button:hover {
+    background-color: #555;
+}
+
+iframe {
+    width: 560px;
+    height: 315px;
+}
+
+#main-image {
+    max-width: auto;
+    height: auto;
+}
+
+#cart-items p strong {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* mobile */
+
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    #contact-form input[type="text"],
+    #contact-form input[type="email"],
+    #contact-form textarea,
+    #cart-items ul li img {
+        width: 100%;
+    }
+
+    iframe {
+        width: 100%;
+        height: auto;
+    }
+
+    main {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    nav ul li {
+        margin-right: 10px;
+    }
+
+    #contact-form button,
+    #cart-items ul li div button,
+    #cart-items button {
+        padding: 10px;
+    }
+}

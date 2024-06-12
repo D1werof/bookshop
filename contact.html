@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакти - Інтернет-книгарня</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Контакти</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="about.html">Про нас</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="contact-info">
+            <h2>Контактна інформація</h2>
+            <p><strong>Адреса:</strong> вул. Келецька, 98, м. Вінниця</p>
+            <p><strong>Телефон:</strong> +1234567890</p>
+            <p><strong>Email:</strong> bookshop@gmail.com</p>
+            <p><strong>Години роботи:</strong> Пн-Пт: 9:00-18:00, Сб-Нд: 10:00-16:00</p>
+        </section>
+        
+        <section id="contact-form">
+            <h2>Зворотній зв'язок</h2>
+            <form action="send_email.php" method="post">
+                <label for="name">Ім'я:</label>
+                <input type="text" id="name" name="name" required><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br>
+                <label for="message">Повідомлення:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br>
+                <button type="submit">Відправити</button>
+            </form> 
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Інтернет-книгарня. Усі права захищено.</p>
+    </footer>
+</body>
+</html>

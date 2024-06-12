@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Інтернет-книгарня</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            height: 100vh;
+            justify-content: center;
+            background-color: rgb(168, 168, 168);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            padding-left: 20px;
+        }
+
+        .image-container {
+            width: 260px;
+            height: 120px;
+            transform-style: preserve-3d;
+            transform: perspective(1000px) rotateY(0deg);
+            transition: transform .7s;
+            margin-top: 10px;
+        }
+
+        .image-container span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: rotateY(calc(var(--i) * 90deg)) translateZ(400px);
+        }
+
+        .image-container span img {
+            position: absolute;
+            top: -150px;
+            left: 0;
+            width: 250px;
+            height: 380px;
+            aspect-ratio: 1/1;
+            -o-object-fit: cover;
+            object-fit: cover;
+            filter: grayscale(100%);
+        }
+
+        .btn-container {
+            position: relative;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .btn {
+            position: absolute;
+            bottom: -300px;
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .btn:hover {
+            filter: brightness(1.5);
+        }
+
+        .image-container span img:hover {
+            filter: none;
+        }
+
+        #prev {
+            left: 45%;
+        }
+
+        #next {
+            right: 45%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="about.html">Про нас</a></li>
+                <li><a href="contact.html">Контакти</a></li>
+                <li><a href="catalog.html">Каталог</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="image-container">
+        <span style="--i: 1">
+            <img src="images/book1.jpg">
+        </span>
+        <span style="--i: 2">
+            <img src="images/book2.jpg">
+        </span>
+        <span style="--i: 3">
+            <img src="images/book3.jpg">  
+        </span>
+        <span style="--i: 4">
+            <img src="images/book4.jpg">
+        </span>
+    </div>
+    <div class="btn-container">
+        <button class="btn" id="prev">←<i class="fa-solid fa-rotate-left"></i></button>
+        <button class="btn" id="next">→<i class="fa-solid fa-rotate-right"></i></button>
+    </div>
+    <script defer src="script.js"></script>
+</body>
+</html>
