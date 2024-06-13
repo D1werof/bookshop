@@ -1,5 +1,3 @@
-/* Весь ваш поточний CSS код */
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -40,6 +38,7 @@ main {
 #contact-info,
 #image-section,
 #main-image,
+#yt-video
 #iframe,
 #categories,
 section,
@@ -123,6 +122,14 @@ section ul li p,
     background-color: #555;
 }
 
+#image-section {
+    text-align: center;
+}
+
+#yt-video {
+    text-align: center;
+}
+
 iframe {
     width: 560px;
     height: 315px;
@@ -157,6 +164,9 @@ iframe {
         width: 100%;
         height: auto;
     }
+    img {
+        width: 31%;
+    }
 
     main {
         padding: 10px;
@@ -173,6 +183,7 @@ iframe {
     }
 
     nav ul li {
+        margin: 15px;
         margin-right: 10px;
     }
 

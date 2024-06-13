@@ -1,45 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Назва книги - Інтернет-книгарня</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <h1>Назва книги</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="about.html">Про нас</a></li>
-                <li><a href="contact.html">Контакти</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-            </ul>
-        </nav>
+      <h1>Назва книги</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Головна</a></li>
+          <li><a href="about.html">Про нас</a></li>
+          <li><a href="contact.html">Контакти</a></li>
+          <li><a href="catalog.html">Каталог</a></li>
+          <li><a href="post.html">Додати</a></li>
+        </ul>
+      </nav>
     </header>
-    
-    <main>
-        <section id="book-details">
-            <h2>Деталі книги</h2>
-            <div>
-                <img src="book_cover.jpg" alt="Обкладинка книги">
-                <div>
-                    <h3>Назва книги</h3>
-                    <p><strong>Автор:</strong> Ім'я автора</p>
-                    <p><strong>Жанр:</strong> Жанр</p>
-                    <p><strong>Рік видання:</strong> Рік</p>
-                    <p><strong>Опис:</strong> Короткий опис книги.</p>
-                    <p><strong>Ціна:</strong> UAH 320.00</p>
-                    <a href="cart.html"><button>Додати до кошика</button></a>
 
-                </div>
-            </div>
-        </section>
+    <main>
+      <section id="book-details">
+        <h2>Деталі книги</h2>
+        <div id="book-content"></div>
+      </section>
     </main>
-    
+
     <footer>
-        <p>&copy; 2024 Інтернет-книгарня. Усі права захищено.</p>
+      <p>&copy; 2024 Інтернет-книгарня. Усі права захищено.</p>
     </footer>
-</body>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        const params = new URLSearchParams(window.location.search);
+        const bookId = params.get("id");
+
+        try {
+          const response = await fetch(
+            `http://localhost:5000/api/books/${bookId}`
+          );
+          const book = await response.json();
+
+          document.title = `${book.title} - Інтернет-книгарня`;
+
+          document.querySelector("#book-content").innerHTML = `
+                    <div>
+                        <img src="data:${
+                          book.img.contentType
+                        };base64,${arrayBufferToBase64(
+            book.img.data.data
+          )}" alt="${book.title}" style="width:160px; max-height:270px">
+                        <div>
+                            <h3>${book.title}</h3>
+                            <p><strong>Автор:</strong> ${book.author}</p>
+                            <p><strong>Жанр:</strong> ${book.genre}</p>
+                            <p><strong>Рік видання:</strong> ${new Date(
+                              book.date
+                            ).getFullYear()}</p>
+                            <p><strong>Опис:</strong> ${book.description}</p>
+                            <p><strong>Ціна:</strong> UAH ${book.price}</p>
+                        </div>
+                    </div>
+                `;
+        } catch (error) {
+          console.error("Failed to load book details:", error);
+        }
+
+        function arrayBufferToBase64(buffer) {
+          let binary = "";
+          let bytes = new Uint8Array(buffer);
+          let len = bytes.byteLength;
+          for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+          }
+          return window.btoa(binary);
+        }
+      });
+    </script>
+  </body>
 </html>

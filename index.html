@@ -1,35 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Головна - Інтернет-книгарня</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <h1>Ласкаво просимо до Інтернет-книгарні</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="about.html">Про нас</a></li>
-                <li><a href="contact.html">Контакти</a></li>
-                <li><a href="catalog.html">Каталог</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section id="image-section">
-            <h2>Найновіші поступлення</h2>
-            <img width=31% height="100" id="main-image" src="images/books.jpg" alt="Найновіші поступлення" loading="lazy">
-            <img width=32% height="100" id="main-image" src="images/books2.jpg" alt="Найновіші поступлення" loading="lazy">
-            <img width=32% height="100" id="main-image" src="images/book3.jpg" alt="Найновіші поступлення" loading="lazy">
-        </section>
-    </main>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ласкаво просимо до нашої інтернет книгарні – вашого надійного партнера у світі літератури! 
+      Ми пропонуємо широкий асортимент книг на будь-який смак та для будь-якої вікової категорії. 
+      В нашому каталозі ви знайдете українську та зарубіжну літературу, бестселери, новинки, класичні твори, дитячі книжки, підручники, книги для саморозвитку та багато іншого."
+    />
+    <meta
+      name="keywords"
+      content="Книги онлайн, Купити книги, Інтернет магазин книжок, Доставка книг, Українські книги, Сучасна література, Дитячі книги, 
+      Художня література, Бестселери, Недорогі книги, Книги з доставкою, Електронні книги, Класична література, Книги для саморозвитку, 
+      Книги на подарунок, Купити книги українською мовою онлайн, Доставка книжок додому, Недорогі книги з доставкою, Найкращі книги для дітей, 
+      Сучасні романи купити онлайн, Знижки на книги онлайн, Бестселери купити з доставкою, Антикварні книги інтернет магазин, Книжкові новинки 2024 року, 
+      Купити класичну літературу онлайн"
+    />
+    <meta name="author" content="Bookshop" />
 
-        <footer>
-        <p>&copy; 2024 Інтернет-книгарня. Усі права захищено.</p>
+    <title>Головна - Інтернет-книгарня</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      #image-section {
+        text-align: center;
+        margin-top: 10px;
+      }
+      #image-section h2 {
+        margin-bottom: 10px;
+      }
+      #image-section img {
+        margin: 10px;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Ласкаво просимо до Інтернет-книгарні</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Головна</a></li>
+          <li><a href="about.html">Про нас</a></li>
+          <li><a href="contact.html">Контакти</a></li>
+          <li><a href="catalog.html">Каталог</a></li>
+          <li><a href="post.html">Додати</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="image-section">
+        <h2>Найновіші поступлення</h2>
+        <div id="latest-books"></div>
+      </section>
+
+      <!-- <section id="yt-video">
+        <h2>Майбутні поступлення</h2>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/wPDAjvQCgIg?si=wQo4I_OPOXpP7qWR"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </section> -->
+    </main>
+    <footer>
+      <p>&copy; 2024 Інтернет-книгарня. Усі права захищено.</p>
     </footer>
-</body>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const latestBooksContainer = document.getElementById("latest-books");
+
+      const fetchLatestBooks = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/books?limit=3&sort=-date"
+          );
+          const books = await response.json();
+          books.forEach((book) => {
+            const bookLink = document.createElement("a");
+            bookLink.href = `book.html?id=${book._id}`;
+            const bookImg = document.createElement("img");
+            bookImg.width = 200;
+            bookImg.height = 120;
+            bookImg.src = `data:${
+              book.img.contentType
+            };base64,${arrayBufferToBase64(book.img.data.data)}`;
+            bookImg.alt = book.title;
+            bookImg.loading = "lazy";
+            bookLink.appendChild(bookImg);
+            latestBooksContainer.appendChild(bookLink);
+          });
+        } catch (err) {
+          console.error("Failed to load latest books:", err);
+        }
+      };
+
+      const arrayBufferToBase64 = (buffer) => {
+        let binary = "";
+        const bytes = new Uint8Array(buffer);
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+      };
+
+      fetchLatestBooks();
+    });
+  </script>
 </html>
