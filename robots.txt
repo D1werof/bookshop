@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /post/
+Allow: /
+
+Sitemap: https://d1werof.github.io/bookshop/sitemap.xml
